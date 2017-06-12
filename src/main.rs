@@ -13,12 +13,13 @@ pub struct Point {
     y: u32,
 }
 
-const WIDTH: u32 = 800;
-const HEIGHT: u32 = 600;
-
 ///main program
 pub fn main() {
-    let mut img = image::ImageBuffer::from_fn(WIDTH, HEIGHT, |x, y|{
+    tri(800, 600);
+}
+
+fn tri(width:u32, height:u32){
+        let mut img = image::ImageBuffer::from_fn(width, height, |x, y|{
         if x == 0 && y == 0 {
             image::Luma([0u8])
         } else {
@@ -29,9 +30,9 @@ pub fn main() {
     let mut cnt: u32 = 1_000_000;
 
     let pts: [Point; 3] = [
-        Point {x: WIDTH/2, y: 0},
-        Point {x: 0, y: HEIGHT},
-        Point {x: WIDTH, y: HEIGHT},
+        Point {x: width/2, y: 0},
+        Point {x: 0, y: height},
+        Point {x: width, y: height},
     ];
     let mut num: usize;
 
@@ -48,5 +49,4 @@ pub fn main() {
 
     let ref mut fout = File::create(&Path::new("tri.png")).unwrap();
     let _ = image::ImageLuma8(img).save(fout, image::PNG);
-
 }
